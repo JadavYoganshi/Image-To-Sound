@@ -40,8 +40,8 @@ Image_to_sound
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/ocr-tts-flask.git
-cd ocr-tts-flask
+git clone https://github.com/yourusername/Image_To_Sound.git
+cd Image_To_Sound
 ```
 
 2. **Create virtual environment & install dependencies**
