@@ -3,5 +3,5 @@ Pillow
 pytesseract
 gTTS
 langdetect
-opencv-python
-numpy
+indic-transliteration
+pyttsx3

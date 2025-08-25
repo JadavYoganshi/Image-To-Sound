@@ -6,6 +6,7 @@ import uuid
 from PIL import Image
 import pytesseract
 from gtts import gTTS
+import pyttsx3
 from shutil import which
 import time
 from langdetect import detect
@@ -126,6 +127,9 @@ def index():
         except Exception:
             detected = "en"
 
+        # Get selected TTS engine (default gTTS)
+        engine_choice = request.form.get("engine", "gtts")
+
         # Convert to speech
         mp3_name = f"{uid}.mp3"
         mp3_path = OUTPUT_FOLDER / mp3_name
@@ -134,17 +138,33 @@ def index():
                 # Convert Devanagari -> IAST
                 text_iast = transliterate(cleaned_text, sanscript.DEVANAGARI, sanscript.IAST)
                 print("Sanskrit (IAST):", text_iast)
-                tts = gTTS(text=text_iast, lang="en")  # use English TTS for IAST
+                if engine_choice == "pyttsx3":
+                    engine = pyttsx3.init()
+                    engine.save_to_file(text_iast, str(mp3_path))
+                    engine.runAndWait()
+                else:
+                    tts = gTTS(text=text_iast, lang="en")  # use English TTS for IAST
+                    tts.save(str(mp3_path))
             else:
                 lang_code = LANG_MAP.get(detected, "en")  # fallback to English
-                tts = gTTS(text=cleaned_text, lang=lang_code)
-
-            tts.save(str(mp3_path))
+                if engine_choice == "pyttsx3":
+                    engine = pyttsx3.init()
+                    engine.save_to_file(cleaned_text, str(mp3_path))
+                    engine.runAndWait()
+                else:
+                    tts = gTTS(text=cleaned_text, lang=lang_code)
+                    tts.save(str(mp3_path))
         except Exception as e:
             flash("Text-to-speech failed: " + str(e))
             return redirect(request.url)
 
-        return render_template("result.html", text=cleaned_text, audio_url=url_for("get_output", filename=mp3_name))
+        return render_template(
+            "result.html",
+            text=cleaned_text,
+            audio_url=url_for("get_output", filename=mp3_name),
+            engine=engine_choice,
+            lang=detected
+        )
 
     return render_template("index.html")
 
