@@ -17,6 +17,7 @@ Image_to_sound
 ├── outputs/            # Generated MP3 files (auto-cleaned)
 ├── requirements.txt    # Dependencies
 └── README.md
+|__ .gitignore
 ```
 ---
 ## 🚀 Features
