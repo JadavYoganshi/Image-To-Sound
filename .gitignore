@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.env
+
+# App runtime artifacts
+uploads/
+outputs/
+*.mp3
+*.wav
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
