@@ -1,5 +1,5 @@
 
-# 🖼️ OCR + Text-to-Speech Web App
+# 🖼️ Image to Sound Converter
 
 This Flask web application allows you to upload an image containing text in **English, Hindi, Gujarati, or Sanskrit**, extract the text using **Tesseract OCR**, automatically detect the language, and then generate **speech output (MP3)** using either **Google gTTS** or **pyttsx3**.
 
@@ -8,7 +8,7 @@ This Flask web application allows you to upload an image containing text in **En
 ## 📂 Project Structure
 
 ```
-.
+Image_to_sound
 ├── web_app.py          # Main Flask application
 ├── templates/
 │   ├── index.html      # Upload form
@@ -109,6 +109,11 @@ indic-transliteration
 - **gTTS requires internet**. If offline use `pyttsx3` option.
 - Sanskrit pronunciation is **approximated** via transliteration. For 100% Vedic Sanskrit pronunciation, a specialized TTS engine is required.
 - Uploaded images & audio files are auto-deleted after 1 hour.
+
+---
+## 🧑‍💻 Author
+
+Yoganshi Jadav — [GitHub](https://github.com/JadavYoganshi)
 
 ---
 
